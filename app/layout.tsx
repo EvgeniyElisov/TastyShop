@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html className={nunito.variable} lang="en">
       <body className={nunito.className}>
-        <main className=" min-h-screen ">
+        <main className="min-h-screen">
           <Header />
           {children}
         </main>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "components/ui";
 import { Container } from ".";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
+
 type Props = {
   className?: string;
 };
@@ -16,7 +17,7 @@ export const Header = ({ className }: Props) => {
           <div className="flex items-center gap-4">
             <Image src={"/logo.png"} alt={"Logo"} width={35} height={35} />
             <div>
-              <h1 className="text-2xl uppercase font-black">React Pizza</h1>
+              <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
               <p className="text-sm text-gray-400 leading-3">вкуснее уже некуда</p>
             </div>
           </div>
