@@ -21,7 +21,7 @@ export const USERS_DATA = [
 
 export const CATEGORIES_DATA = [
   { name: "Пиццы" },
-  { name: "Завтрак" },
+  { name: "Завтраки" },
   { name: "Закуски" },
   { name: "Коктейли" },
   { name: "Напитки" },
@@ -119,17 +119,17 @@ export const PRODUCTS_DATA = [
   {
     name: "Омлет с ветчиной и грибами",
     imageUrl: "https://media.dodostatic.net/image/r:292x292/11EE7970321044479C1D1085457A36EB.webp",
-    categoryName: "Завтрак",
+    categoryName: "Завтраки",
   },
   {
     name: "Омлет с пепперони",
     imageUrl: "https://media.dodostatic.net/image/r:292x292/11EE94ECF33B0C46BA410DEC1B1DD6F8.webp",
-    categoryName: "Завтрак",
+    categoryName: "Завтраки",
   },
   {
     name: "Кофе Латте",
     imageUrl: "https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp",
-    categoryName: "Завтрак",
+    categoryName: "Завтраки",
   },
   {
     name: "Дэнвич ветчина и сыр",

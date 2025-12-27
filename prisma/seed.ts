@@ -37,16 +37,6 @@ const seedUsers = async (): Promise<number[]> => {
   return createdUsers.map((u) => u.id);
 };
 
-const seedVerificationCodes = async (userIds: number[]): Promise<void> => {
-  const codes = userIds.map((userId) => ({
-    userId,
-    code: Math.floor(100000 + Math.random() * 900000).toString(),
-  }));
-
-  await prisma.verificationCode.createMany({
-    data: codes,
-  });
-};
 
 const seedCategories = async (): Promise<Map<string, number>> => {
   await prisma.category.createMany({
@@ -98,6 +88,16 @@ const seedProducts = async (categoryMap: Map<string, number>): Promise<number[]>
   return createdProducts.map((p) => p.id);
 };
 
+const seedProductVariants = async (productIds: number[]): Promise<void> => {
+  for (const productId of productIds) {
+    await prisma.productVariant.create({
+      data: generateProductVariant({
+        productId,
+      }),
+    });
+  }
+};
+
 const seedPizzas = async (
   categoryMap: Map<string, number>,
   ingredientIds: number[]
@@ -146,13 +146,7 @@ const seedPizzas = async (
   return pizzaResults;
 };
 
-const seedProductVariants = async (productIds: number[]): Promise<void> => {
-  const productVariantsData = productIds.map((productId) => generateProductVariant({ productId }));
 
-  await prisma.productVariant.createMany({
-    data: productVariantsData,
-  });
-};
 
 const seedCarts = async (userIds: number[]): Promise<Map<number, number>> => {
   const carts = await prisma.cart.createMany({
@@ -303,9 +297,6 @@ const seedDatabase = async (): Promise<void> => {
   const userIds = await seedUsers();
   console.log("✅ Пользователи созданы");
 
-  await seedVerificationCodes(userIds);
-  console.log("✅ Коды верификации созданы");
-
   const categoryMap = await seedCategories();
   console.log("✅ Категории созданы");
 
@@ -318,8 +309,10 @@ const seedDatabase = async (): Promise<void> => {
   await seedProductVariants(productIds);
   console.log("✅ Варианты продуктов созданы");
 
-  await seedPizzas(categoryMap, ingredientIds);
+  const pizzaResults = await seedPizzas(categoryMap, ingredientIds);
   console.log("✅ Пиццы созданы");
+
+  
 
   const cartMap = await seedCarts(userIds);
   console.log("✅ Корзины созданы");
