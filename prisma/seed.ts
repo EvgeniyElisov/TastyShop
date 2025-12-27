@@ -67,8 +67,17 @@ const seedIngredients = async (): Promise<number[]> => {
 };
 
 const seedProducts = async (categoryMap: Map<string, number>): Promise<number[]> => {
+  const productsData = PRODUCTS_DATA.filter((product) => {
+    const categoryId = categoryMap.get(product.categoryName);
+    if (!categoryId) {
+      console.warn(`Категория "${product.categoryName}" не найдена для продукта "${product.name}"`);
+      return false;
+    }
+    return true;
+  });
+
   const products = await prisma.product.createMany({
-    data: PRODUCTS_DATA.map((product) => ({
+    data: productsData.map((product) => ({
       name: product.name,
       imageUrl: product.imageUrl,
       categoryId: categoryMap.get(product.categoryName)!,
@@ -78,7 +87,7 @@ const seedProducts = async (categoryMap: Map<string, number>): Promise<number[]>
   const createdProducts = await prisma.product.findMany({
     where: {
       name: {
-        in: PRODUCTS_DATA.map((p) => p.name),
+        in: productsData.map((p) => p.name),
       },
     },
     orderBy: { id: "asc" },
@@ -105,7 +114,17 @@ const seedPizzas = async (
   const pizzaResults = [];
 
   for (const pizza of PIZZAS_DATA) {
-    const categoryId = categoryMap.get(pizza.categoryName)!;
+    const categoryId = categoryMap.get(pizza.categoryName);
+    if (!categoryId) {
+      console.warn(`Категория "${pizza.categoryName}" не найдена для пиццы "${pizza.name}"`);
+      continue;
+    }
+
+    if (pizza.ingredientIndices.length < 2) {
+      console.warn(`Неверные индексы ингредиентов для пиццы "${pizza.name}"`);
+      continue;
+    }
+
     const ingredientSlice = ingredientIds.slice(pizza.ingredientIndices[0], pizza.ingredientIndices[1]);
 
     const createdPizza = await prisma.product.create({
@@ -170,7 +189,11 @@ const seedCarts = async (userIds: number[]): Promise<Map<number, number>> => {
 };
 
 const seedCartItems = async (cartMap: Map<number, number>, ingredientIds: number[]): Promise<void> => {
-  const firstCartId = Array.from(cartMap.values())[0];
+  const cartIds = Array.from(cartMap.values());
+  const firstCartId = cartIds[0];
+  
+  if (!firstCartId) return;
+
   const firstProductVariant = await prisma.productVariant.findFirst({
     orderBy: { id: "asc" },
     select: { id: true },
@@ -189,7 +212,7 @@ const seedCartItems = async (cartMap: Map<number, number>, ingredientIds: number
     },
   });
 
-  const secondCartId = Array.from(cartMap.values())[1];
+  const secondCartId = cartIds[1];
   const secondProductVariant = await prisma.productVariant.findFirst({
     skip: 1,
     orderBy: { id: "asc" },
@@ -211,6 +234,8 @@ const seedCartItems = async (cartMap: Map<number, number>, ingredientIds: number
 };
 
 const seedOrders = async (userIds: number[]): Promise<void> => {
+  if (userIds.length < 2) return;
+
   const productVariants = await prisma.productVariant.findMany({
     take: 3,
     select: { id: true, price: true },
@@ -230,7 +255,7 @@ const seedOrders = async (userIds: number[]): Promise<void> => {
     data: {
       userId: userIds[0],
       token: randomUUID(),
-      items: orderItems as any,
+      items: orderItems,
       status: OrderStatus.PENDING,
       totalAmount,
       fullName: "Иван Иванов",
@@ -241,13 +266,16 @@ const seedOrders = async (userIds: number[]): Promise<void> => {
     },
   });
 
+  const secondOrderItems = orderItems.slice(0, 2);
+  const secondOrderTotalAmount = secondOrderItems.reduce((sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity, 0);
+
   await prisma.order.create({
     data: {
       userId: userIds[0],
       token: randomUUID(),
-      items: orderItems.slice(0, 2) as any,
+      items: secondOrderItems,
       status: OrderStatus.SUCCEEDED,
-      totalAmount: orderItems.slice(0, 2).reduce((sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity, 0),
+      totalAmount: secondOrderTotalAmount,
       paymentId: randomUUID(),
       fullName: "Иван Иванов",
       address: "ул. Ленина, д. 10, кв. 5",
@@ -260,7 +288,7 @@ const seedOrders = async (userIds: number[]): Promise<void> => {
     data: {
       userId: userIds[1],
       token: randomUUID(),
-      items: orderItems as any,
+      items: orderItems,
       status: OrderStatus.CANCELLED,
       totalAmount,
       fullName: "Админ Админов",
@@ -311,8 +339,6 @@ const seedDatabase = async (): Promise<void> => {
 
   const pizzaResults = await seedPizzas(categoryMap, ingredientIds);
   console.log("✅ Пиццы созданы");
-
-  
 
   const cartMap = await seedCarts(userIds);
   console.log("✅ Корзины созданы");
