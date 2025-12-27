@@ -32,11 +32,11 @@ export const Filters = ({ className }: Props) => {
         defaultItems={[
           {
             text: "Сырный соус",
-            value: "1",
+            value: "111",
           },
           {
             text: "Моцарелла",
-            value: "2",
+            value: "2222",
           },
           {
             text: "Чеснок",
@@ -79,6 +79,34 @@ export const Filters = ({ className }: Props) => {
           {
             text: "Томаты",
             value: "6",
+          },
+          {
+            text: "Сырный соус",
+            value: "7",
+          },
+          {
+            text: "Моцарелла",
+            value: "8",
+          },
+          {
+            text: "Чеснок",
+            value: "9",
+          },
+          {
+            text: "Томаты",
+            value: "10",
+          },
+          {
+            text: "Сырный соус",
+            value: "11",
+          },
+          {
+            text: "Моцарелла",
+            value: "12",
+          },
+          {
+            text: "Чеснок",
+            value: "13",
           },
         ]}
       />
