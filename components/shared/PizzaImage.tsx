@@ -13,7 +13,7 @@ const mapSizeToDimensions = {
   40: 500,
 };
 
-export const ProductImage = ({ src, alt, size, className }: Props) => {
+export const PizzaImage = ({ src, alt, size, className }: Props) => {
   return (
     <div className={cn("flex items-center justify-center flex-1 relative w-full", className)}>
       <Image
