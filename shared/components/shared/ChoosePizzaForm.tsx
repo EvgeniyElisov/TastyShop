@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
+import { PizzaSize, pizzaSizes, PizzaType, pizzaTypes } from "shared/constants/pizza";
 import { cn } from "shared/lib/utils";
 import { ProductWithRelations } from "types/product";
-import { GroupVariants, PizzaImage, Title } from ".";
+import { GroupVariants, IngredientItem, PizzaImage, Title } from ".";
 import { Button } from "../ui";
-import { PizzaSize, pizzaSizes, PizzaType, pizzaTypes } from "shared/constants/pizza";
-import { useStartTyping } from "react-use";
-import { useState } from "react";
+import { useSet } from "react-use";
 
 type Props = {
   imageUrl: string;
@@ -24,37 +24,6 @@ export const ChoosePizzaForm= ({
     ingredients, 
     onClickAdd, 
     className }: Props) => {
-  //   const {
-  //     size,
-  //     type,
-  //     availablePizzaSizes,
-  //     setPizzaSize,
-  //     setPizzaType,
-  //     textDetaills,
-  //     loading,
-  //     addPizza,
-  //     selectedIngredientsIds,
-  //     toggleAddIngredient,
-  //   } = useChoosePizza(items);
-
-  //   const totalIngredientPrice: number =
-  //     ingredients
-  //       ?.filter((ingredient) => selectedIngredientsIds.has(ingredient.id))
-  //       ?.reduce((acc, item) => acc + item.price, 0) || 0;
-
-  //   const pizzaPrice: number = items?.find((item) => item.pizzaType === type)?.price || 0;
-  //   const totalPrice: number = totalIngredientPrice + pizzaPrice;
-
-  //   const handleClickAdd = async () => {
-  //     try {
-  //       await addPizza();
-  //       onClickAdd?.();
-  //     } catch (error) {
-  //       toast.error('Произошла ошибка при добавлении в корзину');
-  //       console.error(error);
-  //     }
-  //   };
-
 
   const textDetaills = "Lorem ipsum dolor sit amet consectetur";
 
@@ -62,27 +31,20 @@ export const ChoosePizzaForm= ({
 
   const [size, setSize] = useState<PizzaSize>(20)
   const [type, setType] = useState<PizzaType>(1)
+  const [selectedIngredientsIds, {toggle: toggleSelectedIngredientsIds}] = useSet(new Set<number>([]))
 
   return (
     <div className={cn(className, "flex flex-1")}>
       <PizzaImage src={imageUrl} alt={name} size={size} />
 
-      <div className="w-[490px] bg-[#FCFCFC] p-7">
+      <div className="w-[490px] bg-form-bg p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <p className="text-gray-400">{textDetaills}</p>
 
-        {/* <PizzaSelector
-          pizzaSizes={availablePizzaSizes}
-          selectedSize={String(size)}
-          selectedPizzaType={String(type)}
-          onClickSize={setPizzaSize}
-          onClickPizzaType={setPizzaType}
-        />
+       
 
-        <div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar">
-          <IngredientsList ingredients={ingredients} onClickAdd={toggleAddIngredient} selectedIds={selectedIngredientsIds} />
-        </div> */}
+       
 
         <div className={'flex flex-col gap-3 mt-5 mb-8'}>
           <GroupVariants 
@@ -97,6 +59,22 @@ export const ChoosePizzaForm= ({
             onClick={(value) => setType(Number(value) as PizzaType)}
           />
         </div>
+
+        <div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar">
+          <div className={"grid grid-cols-3 gap-3"}>
+            {ingredients.map((ingredient) => (
+              <IngredientItem 
+                key={ingredient.id} 
+                name={ingredient.name} 
+                price={ingredient.price} 
+                imageUrl={ingredient.imageUrl} 
+                onClick={() => toggleSelectedIngredientsIds(ingredient.id)}
+                active={selectedIngredientsIds.has(ingredient.id)}
+              />
+            ))}
+          </div>
+        </div>
+       
 
         <Button 
         // loading={loading} 

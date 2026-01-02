@@ -22,26 +22,27 @@ export default async function ProductPage({ params }: Props) {
     <Container className={"flex flex-col mt-10 mb-10"}>
       <div className={"flex flex-1"}>
         <PizzaImage src={product.imageUrl} alt={product.name} size={20} />
-        <div className={"w-[490px] bg-[#f9f4f0] p-7"}>
+        <div className={"w-[490px] bg-form-bg p-7"}>
           <Title text={product.name} size="md" className="font-extrabold mb-1" />
           <p className={"text-gray-400"}>Lorem ipsum dolor sit amet consectetur</p>
-          <GroupVariants 
-          selectedValue="1"
-          items={[
-            {
-              name: "Маленькая",
-              value: "1",
-            },
-            {
-              name: "Средняя",
-              value: "2",
-            },
-            {
-              name: "Большая",
-              value: "3",
-              disabled: true,
-            },
-          ]} />
+          <GroupVariants
+            value="1"
+            items={[
+              {
+                name: "Маленькая",
+                value: "1",
+              },
+              {
+                name: "Средняя",
+                value: "2",
+              },
+              {
+                name: "Большая",
+                value: "3",
+                disabled: true,
+              },
+            ]}
+          />
         </div>
       </div>
     </Container>

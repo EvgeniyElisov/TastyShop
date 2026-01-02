@@ -58,7 +58,7 @@ export const ChooseProductForm: React.FC<Props> = ({
         />
       </div>
 
-      <div className="w-[490px] bg-[#f9f4f0] p-7">
+      <div className="w-[490px] bg-form-bg p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <Button
