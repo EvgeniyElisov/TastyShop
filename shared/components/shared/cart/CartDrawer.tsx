@@ -26,7 +26,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
           </SheetTitle>
         </SheetHeader>
 
-        <div className="-mx-6 mt-5 overflow-auto scrollbar flex-1">
+        <div className="-mx-6 mt-5 overflow-auto flex-1">
           <div className={"mb-2"}>
             <CartDrawerItem
               id={1}
