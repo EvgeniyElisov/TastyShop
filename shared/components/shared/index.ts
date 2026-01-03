@@ -19,3 +19,4 @@ export { PizzaSelector } from "./PizzaSelector";
 export { IngredientItem } from "./IngredientItem";
 export { IngredientsList } from "./IngredientsList";
 export * from "./modals";
+export * from "./cart";

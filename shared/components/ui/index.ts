@@ -1,4 +1,4 @@
-export { Button } from "./Button"
+export { Button } from "./Button";
 export { Input } from "./Input";
 export { Select } from "./Select";
 export { Checkbox } from "./Checkbox";
@@ -7,3 +7,13 @@ export { Dialog, DialogContent, DialogTitle } from "./Dialog";
 export { Drawer } from "./Drawer";
 export { Popover } from "./Popover";
 export { Skeleton } from "./Skeleton";
+export { 
+    Sheet, 
+    SheetContent, 
+    SheetHeader, 
+    SheetTitle, 
+    SheetDescription, 
+    SheetFooter, 
+    SheetTrigger, 
+    SheetClose 
+} from "./Sheet";

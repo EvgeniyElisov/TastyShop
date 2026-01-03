@@ -1,0 +1,19 @@
+import Image from "next/image";
+import { cn } from "shared/lib/utils";
+
+interface Props {
+  src: string;
+  className?: string;
+}
+
+export const CartItemDetailsImage = ({ src, className }: Props) => {
+  return (
+    <Image 
+      className={cn("w-[60px] h-[60px]", className)} 
+      src={src} 
+      width={60} 
+      height={60} 
+      alt="Cart Item Image" 
+    />
+  );
+};
