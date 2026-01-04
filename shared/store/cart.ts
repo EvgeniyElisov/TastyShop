@@ -1,6 +1,7 @@
 import { PizzaSize, PizzaType } from "shared/constants/pizza";
 import { getCartDetails } from "shared/lib";
 import { apiClient } from "shared/services";
+import { CreateCartItemValues } from "shared/services/dto/cart";
 import { create } from "zustand";
 
 export type CartStateItem = {
@@ -14,7 +15,7 @@ export type CartStateItem = {
   ingredients: Array<{ name: string; price: number }>;
 };
 
-export type CartState = {
+export type State = {
   loading: boolean;
   error: boolean;
   totalAmount: number;
@@ -25,7 +26,7 @@ export type CartState = {
   removeCartItem: (id: number) => Promise<void>;
 };
 
-export const useCartStore = create<CartState>((set, get) => ({
+export const useCartStore = create<State>((set, get) => ({
   loading: true,
   error: false,
   totalAmount: 0,
@@ -54,7 +55,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ loading: false });
     }
   },
-   removeCartItem: async (id: number) => {
+  removeCartItem: async (id: number) => {
     try {
       set({ loading: true, error: false });
       const data = await apiClient.cart.removeCartItem(id);
@@ -66,18 +67,16 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ loading: false });
     }
   },
-  addCartItem: async (values: any) => {},
-  // addCartItem: async (values: CreateCartItemValues) => {
-  //   try {
-  //     set({ loading: true, error: false });
-  //     const data = await Api.cart.addCartItem(values);
-  //     set(getCartDetails(data));
-  //   } catch (error) {
-  //     console.error(error);
-  //     set({ error: true });
-  //   } finally {
-  //     set({ loading: false });
-  //   }
-  // },
- 
+  addCartItem: async (values: CreateCartItemValues) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await apiClient.cart.addCartItem(values);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

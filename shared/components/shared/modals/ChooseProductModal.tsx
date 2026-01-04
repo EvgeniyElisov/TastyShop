@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ProductWithRelations } from "types/product";
 import { ChoosePizzaForm, ChooseProductForm } from "..";
 import { Dialog, DialogContent } from "shared/components/ui";
+import { useCartStore } from "shared/store";
 
 type Props = {
   product: ProductWithRelations;
@@ -13,7 +14,21 @@ type Props = {
 
 export const ChooseProductModal = ({ product, className }: Props) => {
   const router = useRouter();
-  const isPizzaForm = product.variants.some((variant) => variant.pizzaType);
+  const firstVariant = product.variants[0];
+  const isPizzaForm = Boolean(firstVariant.pizzaType);
+  const addCartItem = useCartStore(state => state.addCartItem);
+
+  const addProductToCart = () => {
+    addCartItem({
+      productVariantId: firstVariant.id,
+    });
+  }
+  const addPizzaToCart = (productVariantId: number, ingredients: number[]) => {
+    addCartItem({
+      productVariantId,
+      ingredients,
+    });
+  }
 
   const closeModalHandler = () => {
     router.back();
@@ -28,11 +43,13 @@ export const ChooseProductModal = ({ product, className }: Props) => {
             name={product.name} 
             ingredients={product.ingredients} 
             variants={product.variants} 
-            onClickAdd={() => {}}
+            addPizzaToCart={addPizzaToCart}
           />
         : <ChooseProductForm 
             imageUrl={product.imageUrl} 
             name={product.name} 
+            price={firstVariant.price}
+            addProductToCart={addProductToCart}
           />}
       </DialogContent>
     </Dialog>

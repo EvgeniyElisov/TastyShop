@@ -1,18 +1,30 @@
 import { ProductVariant } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useSet } from "react-use";
+import { Variant } from "shared/components/shared/GroupVariants";
 import { PizzaSize, PizzaType } from "shared/constants/pizza";
 import { getAvailablePizzaSizes } from "shared/lib";
 
-export const usePizzaOptions = (variants: ProductVariant[], ) =>{
-  const [size, setSize] = useState<PizzaSize>(20)
-  const [type, setType] = useState<PizzaType>(1)
-  const [selectedIngredientsIds, {toggle: toggleSelectedIngredientsIds}] = useSet(new Set<number>([]))
+export type ReturnProps = {
+  size: PizzaSize;
+  setSize: (size: PizzaSize) => void;
+  type: PizzaType;
+  setType: (type: PizzaType) => void;
+  selectedIngredientsIds: Set<number>;
+  toggleSelectedIngredientsIds: (ingredientId: number) => void;
+  availableSizesVariants: Variant[];
+  currentVariantId?: number;
+};
+
+export const usePizzaOptions = (variants: ProductVariant[]): ReturnProps => {
+  const [size, setSize] = useState<PizzaSize>(20);
+  const [type, setType] = useState<PizzaType>(1);
+  const [selectedIngredientsIds, { toggle: toggleSelectedIngredientsIds }] = useSet(new Set<number>([]));
   const availableSizesVariants = getAvailablePizzaSizes(type, variants);
 
-  
-  useEffect(() => 
-    {
+  const currentVariantId = variants.find((variant) => variant.pizzaType === type && variant.size === size)?.id;
+
+  useEffect(() => {
     const isCurrentAvailableSize = availableSizesVariants.find((variant) => Number(variant.value) === size && !variant.disabled);
     const availableSize = availableSizesVariants.find((variant) => !variant.disabled);
     if (!isCurrentAvailableSize && availableSize) {
@@ -20,13 +32,14 @@ export const usePizzaOptions = (variants: ProductVariant[], ) =>{
     }
   }, [type]);
 
-  return { 
-    size, 
-    setSize, 
-    type, 
-    setType, 
-    selectedIngredientsIds, 
+  return {
+    size,
+    setSize,
+    type,
+    setType,
+    selectedIngredientsIds,
     toggleSelectedIngredientsIds,
     availableSizesVariants,
-  }
+    currentVariantId,
+  };
 };

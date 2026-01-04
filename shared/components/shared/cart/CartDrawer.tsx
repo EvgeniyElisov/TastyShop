@@ -2,12 +2,11 @@
 
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 import { Button, Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "shared/components/ui";
 import { getCartItemDetails, getProductInCorrectCase } from "shared/lib";
-import { CartDrawerItem } from "..";
 import { useCartStore } from "shared/store";
-import { useEffect } from "react";
-import { PizzaSize, PizzaType } from "shared/constants/pizza";
+import { CartDrawerItem } from "..";
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
   

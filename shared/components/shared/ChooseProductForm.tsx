@@ -1,50 +1,30 @@
 'use client';
 
-import { Button } from '../ui';
-import { cn } from 'shared/lib/utils';
 import Image from 'next/image';
 import React from 'react';
+import { cn } from 'shared/lib/utils';
 import { Title } from '.';
+import { Button } from '../ui';
 
-interface Props {
+type Props = {
   imageUrl: string;
   name: string;
+  price: number;
   className?: string;
-  onClickAdd?: VoidFunction;
+  addProductToCart: () => void;
 }
 
-export const ChooseProductForm: React.FC<Props> = ({
+export const ChooseProductForm = ({
   name,
   imageUrl,
-  onClickAdd,
+  price,
+  addProductToCart,
   className,
-}) => {
-  // const { addCartItem, loading } = useCart();
-
-  // const productItem = items?.[0];
-
-  // if (!productItem) {
-  //   throw new Error('Продукт не найден');
-  // }
-
-  // const productPrice = productItem.price;
-
-  // const handleClickAdd = async () => {
-  //   try {
-  //     await addCartItem({
-  //       productItemId: productItem.id,
-  //       quantity: 1,
-  //     });
-  //     toast.success('Товар добавлен в корзину');
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error('Произошла ошибка при добавлении в корзину');
-  //   }
-
-  //   onClickAdd?.();
-  // };
-
-  const productPrice = 350;
+}: Props) => {
+ 
+  const addProductToCartHandler = () => {
+    addProductToCart();
+  }
 
   return (
     <div className={cn(className, 'flex flex-1')}>
@@ -63,9 +43,9 @@ export const ChooseProductForm: React.FC<Props> = ({
 
         <Button
           // loading={loading}
-          // onClick={handleClickAdd}
+          onClick={addProductToCartHandler}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          Добавить в корзину за {productPrice} ₽
+          Добавить в корзину за {price} ₽
         </Button>
       </div>
     </div>
