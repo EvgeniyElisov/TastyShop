@@ -15,7 +15,7 @@ export const Filters = ({ className }: Props) => {
   const { ingredients, loading } = useIngredients();
   const filters = useFilters();
 
-   useQueryFilters(filters);
+  useQueryFilters(filters);
 
   const items = ingredients.map((ingredient) => ({
     text: ingredient.name,

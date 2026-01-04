@@ -21,8 +21,9 @@ export const ChooseProductModal = ({ product, className }: Props) => {
   const loading = useCartStore((state) => state.loading);
 
 
-  const addProductToCartHandler = async (productVariantId: number, ingredients?: number[]) => {
+  const addProductToCartHandler = async (variantId?: number, ingredients?: number[]) => {
     try {
+      const productVariantId = variantId ?? firstVariant.id;
       await addCartItem({
         productVariantId,
         ingredients,
@@ -48,7 +49,7 @@ export const ChooseProductModal = ({ product, className }: Props) => {
             name={product.name}
             ingredients={product.ingredients}
             variants={product.variants}
-            addPizzaToCart={(productVariantId, ingredients) => addProductToCartHandler(productVariantId, ingredients)}
+            addPizzaToCart={addProductToCartHandler}
             loading={loading}
           />
         ) : (
@@ -56,7 +57,7 @@ export const ChooseProductModal = ({ product, className }: Props) => {
             imageUrl={product.imageUrl} 
             name={product.name} 
             price={firstVariant.price} 
-            addProductToCart={() => addProductToCartHandler(firstVariant.id)} 
+            addProductToCart={addProductToCartHandler} 
             loading={loading} 
           />
         )}
