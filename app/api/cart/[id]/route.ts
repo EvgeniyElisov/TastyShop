@@ -2,7 +2,7 @@ import { prisma } from "prisma/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { updateCartTotalAmount } from "shared/lib/updateCartTotalAmount";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const data = (await req.json()) as { quantity: number };
