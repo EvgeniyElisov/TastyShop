@@ -9,7 +9,7 @@ type Props = CartItemProps & {
   className?: string;
 };
 
-export const CartDrawerItem = ({ className, id, imageUrl, name, price, quantity, details }: Props) => {
+export const CartDrawerItem = ({ className, id, imageUrl, name, price, quantity, details, disabled }: Props) => {
   const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
   const removeCartItem = useCartStore((state) => state.removeCartItem);
 
@@ -22,7 +22,7 @@ export const CartDrawerItem = ({ className, id, imageUrl, name, price, quantity,
   };
 
   return (
-    <div className={cn("flex bg-white p-5 gap-6", className)}>
+    <div className={cn("flex bg-white p-5 gap-6", { "opacity-50 pointer-events-none": disabled }, className)}>
       <CartItemDetailsImage src={imageUrl} />
 
       <div className="flex-1">

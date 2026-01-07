@@ -10,6 +10,7 @@ export type CartStateItem = {
   name: string;
   imageUrl: string;
   price: number;
+  disabled: boolean;
   pizzaSize?: PizzaSize | null;
   pizzaType?: PizzaType | null;
   ingredients: Array<{ name: string; price: number }>;
@@ -57,14 +58,21 @@ export const useCartStore = create<State>((set, get) => ({
   },
   removeCartItem: async (id: number) => {
     try {
-      set({ loading: true, error: false });
+      set((state) => ({
+        loading: true,
+        error: false,
+        items: state.items.map((item) => (item.id === id ? { ...item, disabled: true } : item)),
+      }));
       const data = await apiClient.cart.removeCartItem(id);
       set(getCartDetails(data));
     } catch (error) {
       set({ error: true });
       console.error(error);
     } finally {
-      set({ loading: false });
+      set((state) => ({ 
+        loading: false, 
+        items: state.items.map((item) => (item.id === id ? { ...item, disabled: false } : item)) 
+      }));
     }
   },
   addCartItem: async (values: CreateCartItemValues) => {
