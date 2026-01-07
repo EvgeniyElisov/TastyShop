@@ -11,15 +11,7 @@ import { CartDrawerItem, Title } from "..";
 import { PizzaSize, PizzaType } from "shared/constants/pizza";
 
 export const CartDrawer = ({ children }: { children: React.ReactNode }) => {
-  const { items, totalAmount, updateItemQuantity, removeCartItem } = useCart();
-
-  const onClickCountButtonHandler = (id: number, type: "plus" | "minus", quantity: number) => {
-    updateItemQuantity(id, type === "plus" ? quantity + 1 : quantity - 1);
-  };
-
-  const onClickRemoveCartItemHandler = (id: number) => {
-    removeCartItem(id);
-  };
+  const { items, totalAmount, onClickCountButtonHandler, onClickRemoveCartItemHandler } = useCart();
 
   return (
     <Sheet>
@@ -58,6 +50,7 @@ export const CartDrawer = ({ children }: { children: React.ReactNode }) => {
                       imageUrl={item.imageUrl}
                       name={item.name}
                       price={item.price}
+                      disabled={item.disabled}
                       quantity={item.quantity}
                       details={getCartItemDetails(item.ingredients, item.pizzaType as PizzaType, item.pizzaSize as PizzaSize)}
                       onClickCountButton={(type) => onClickCountButtonHandler(item.id, type, item.quantity)}
@@ -78,7 +71,7 @@ export const CartDrawer = ({ children }: { children: React.ReactNode }) => {
                     <span className="font-bold text-lg">{totalAmount} ₽</span>
                   </div>
 
-                  <Link href="/cart">
+                  <Link href="/checkout">
                     <Button
                       // onClick={() => setRedirecting(true)}
                       // loading={loading || redirecting}

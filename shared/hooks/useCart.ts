@@ -8,9 +8,9 @@ type ReturnProps = {
   items: CartStateItem[];
   totalAmount: number;
   loading: boolean;
-  updateItemQuantity: (id: number, quantity: number) => void;
-  removeCartItem: (id: number) => void;
   addCartItem: (values: CreateCartItemValues) => void;
+  onClickCountButtonHandler: (id: number, type: "plus" | "minus", quantity: number) => void;
+  onClickRemoveCartItemHandler: (id: number) => void;
 };
 
 export const useCart = (): ReturnProps => {
@@ -26,5 +26,20 @@ export const useCart = (): ReturnProps => {
     fetchCartItems();
   }, []);
 
-  return { items, totalAmount, loading, updateItemQuantity, removeCartItem, addCartItem };
+  const onClickCountButtonHandler = (id: number, type: "plus" | "minus", quantity: number) => {
+    updateItemQuantity(id, type === "plus" ? quantity + 1 : quantity - 1);
+  };
+
+  const onClickRemoveCartItemHandler = (id: number) => {
+    removeCartItem(id);
+  };
+
+  return { 
+    items, 
+    totalAmount, 
+    loading, 
+    addCartItem,
+    onClickCountButtonHandler,
+    onClickRemoveCartItemHandler
+  };
 };

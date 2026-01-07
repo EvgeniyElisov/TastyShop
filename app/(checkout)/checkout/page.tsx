@@ -7,20 +7,12 @@ import { useCart } from "shared/hooks";
 import { getCartItemDetails } from "shared/lib";
 
 export default function CheckoutPage() {
-  const { items, totalAmount, updateItemQuantity, removeCartItem } = useCart();
+  const { items, totalAmount, onClickCountButtonHandler, onClickRemoveCartItemHandler } = useCart();
 
   const totalPrice = 2000;
   const vatPrice = 200;
   const deliveryPrice = 100;
   const submitting = false;
-
-  const onClickCountButtonHandler = (id: number, type: "plus" | "minus", quantity: number) => {
-    updateItemQuantity(id, type === "plus" ? quantity + 1 : quantity - 1);
-  };
-
-  const onClickRemoveCartItemHandler = (id: number) => {
-    removeCartItem(id);
-  };
   
   return (
     <Container className="mt-10">

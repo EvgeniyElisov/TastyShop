@@ -16,13 +16,14 @@ export const Item= ({
   price,
   imageUrl,
   quantity,
+  disabled,
   details,
   className,
   onClickCountButton,
   onClickRemoveCartItem,
 }: Props) => {
   return (
-    <div className={cn('flex items-center justify-between', className)}>
+    <div className={cn('flex items-center justify-between', { "opacity-50 pointer-events-none": disabled }, className)}>
       <div className="flex items-center gap-5 flex-1">
         <CartItemDetailsImage src={imageUrl} />
         <CartItemInfo name={name} details={details} />
