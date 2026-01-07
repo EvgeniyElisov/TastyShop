@@ -9,7 +9,7 @@ type Props = {
   endAdornment?: React.ReactNode;
 }
 
-export const WhiteBlock = ({ title, endAdornment, className, contentClassName, children }: PropsWithChildren<Props>) => {
+export const InfoBlock = ({ title, endAdornment, className, contentClassName, children }: PropsWithChildren<Props>) => {
   return (
     <div className={cn("bg-white rounded-3xl", className)}>
       {title && (

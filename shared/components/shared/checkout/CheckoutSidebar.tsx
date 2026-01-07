@@ -1,7 +1,7 @@
 import { ArrowRight, Package, Percent, Truck } from "lucide-react";
 import { Button } from "shared/components/ui";
 import { cn } from "shared/lib/utils";
-import { CheckoutDetails, WhiteBlock } from ".";
+import { CheckoutDetails, InfoBlock } from ".";
 
 type Props = {
   totalAmount: number;
@@ -14,7 +14,7 @@ type Props = {
 
 export const CheckoutSidebar = ({ totalAmount, totalPrice, vatPrice, deliveryPrice, className, submitting }: Props) => {
   return (
-    <WhiteBlock className={cn("p-6 sticky top-4", className)}>
+    <InfoBlock className={cn("p-6 sticky top-4", className)}>
       <div className="flex flex-col gap-1">
         <span className="text-xl">Итого:</span>
         <span className="text-[34px] font-extrabold">{totalPrice} ₽</span>
@@ -40,6 +40,6 @@ export const CheckoutSidebar = ({ totalAmount, totalPrice, vatPrice, deliveryPri
         Перейти к оплате
         <ArrowRight className="w-5 ml-2" />
       </Button>
-    </WhiteBlock>
+    </InfoBlock>
   );
 };

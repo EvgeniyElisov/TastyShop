@@ -3,21 +3,23 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import { Button, Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "shared/components/ui";
+import { useCart } from "shared/hooks";
 import { getCartItemDetails, getProductInCorrectCase } from "shared/lib";
-import { useCartStore } from "shared/store";
-import { CartDrawerItem, Title } from "..";
 import { cn } from "shared/lib/utils";
+import { CartDrawerItem, Title } from "..";
+import { PizzaSize, PizzaType } from "shared/constants/pizza";
 
-export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const totalAmount = useCartStore((state) => state.totalAmount);
-  const items = useCartStore((state) => state.items);
-  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
+export const CartDrawer = ({ children }: { children: React.ReactNode }) => {
+  const { items, totalAmount, updateItemQuantity, removeCartItem } = useCart();
 
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
+  const onClickCountButtonHandler = (id: number, type: "plus" | "minus", quantity: number) => {
+    updateItemQuantity(id, type === "plus" ? quantity + 1 : quantity - 1);
+  };
+
+  const onClickRemoveCartItemHandler = (id: number) => {
+    removeCartItem(id);
+  };
 
   return (
     <Sheet>
@@ -57,7 +59,9 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                       name={item.name}
                       price={item.price}
                       quantity={item.quantity}
-                      details={item.pizzaType && item.pizzaSize ? getCartItemDetails(item.pizzaType, item.pizzaSize, item.ingredients) : ""}
+                      details={getCartItemDetails(item.ingredients, item.pizzaType as PizzaType, item.pizzaSize as PizzaSize)}
+                      onClickCountButton={(type) => onClickCountButtonHandler(item.id, type, item.quantity)}
+                      onClickRemoveCartItem={() => onClickRemoveCartItemHandler(item.id)}
                     />
                   </div>
                 ))}

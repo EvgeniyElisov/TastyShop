@@ -98,6 +98,10 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+  button:hover,
+  a:hover {
+    cursor: pointer;
+  }
 }
 
 #nprogress .bar {

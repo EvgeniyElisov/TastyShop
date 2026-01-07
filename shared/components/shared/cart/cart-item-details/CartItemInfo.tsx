@@ -1,12 +1,15 @@
+import { cn } from "shared/lib/utils";
+
 type Props = {
   name: string;
   details: string;
+  className?: string;
 };
 
-export const CartItemInfo = ({ name, details }: Props) => {
+export const CartItemInfo = ({ name, details, className }: Props) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className={cn("flex items-center justify-between", className)}>
         <h2 className="text-lg font-bold flex-1 leading-6">{name}</h2>
       </div>
       {details.length > 0 && <p className="text-xs text-gray-400">{details}</p>}
