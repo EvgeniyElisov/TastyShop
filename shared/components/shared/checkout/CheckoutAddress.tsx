@@ -1,7 +1,5 @@
-import React from "react";
 import { InfoBlock } from ".";
-import { FormInput } from "../form";
-import { Textarea } from "shared/components/ui";
+import { FormInput, FormTextarea } from "../form";
 
 type Props = {
   totalAmount: number;
@@ -16,7 +14,7 @@ export const CheckoutAddress = ({ totalAmount }: Props) => {
     >
       <div className="flex flex-col gap-5">
         <FormInput name="address" className="text-base" placeholder="Адрес доставки" />
-        <Textarea name="comment" className="text-base" placeholder="Комментарий к заказу" rows={5} />
+        <FormTextarea name="comment" className="text-base" placeholder="Комментарий к заказу" />
       </div>
     </InfoBlock>
   );

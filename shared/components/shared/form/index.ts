@@ -1,5 +1,6 @@
+export { FormField } from "./FormField";
 export { FormInput } from "./FormInput";
-// export { FormTextarea } from "./FormTextarea";
+export { FormTextarea } from "./FormTextarea";
 // export { FormSelect } from "./FormSelect";
 export { ErrorText } from "./ErrorText";
 export { ClearButton } from "./ClearButton";

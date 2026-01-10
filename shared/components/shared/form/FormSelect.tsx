@@ -1,16 +1,15 @@
+// import { SelectProps } from '@radix-ui/react-select';
 // import React from 'react';
 // import { Controller, useFormContext } from 'react-hook-form';
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select';
-// import { SelectProps } from '@radix-ui/react-select';
-// import { RequiredSymbol } from '../required-symbol';
-// import { ErrorText } from '../error-text';
+// import { Select } from 'shared/components/ui';
+// import { ErrorText, Label } from '.';
 
 // type SelectItem = {
 //   value: string;
 //   label: React.ReactNode;
 // };
 
-// interface Props extends SelectProps {
+// type Props = SelectProps & {
 //   label?: string;
 //   required?: boolean;
 //   name: string;
@@ -18,14 +17,14 @@
 //   placeholder?: string;
 // }
 
-// export const FormSelect: React.FC<Props> = ({
+// export const FormSelect = ({
 //   label,
 //   required,
 //   name,
 //   items,
 //   placeholder,
 //   ...props
-// }) => {
+// }: Props) => {
 //   const {
 //     control,
 //     formState: { errors },
@@ -39,9 +38,7 @@
 //       name={name}
 //       render={({ field }) => (
 //         <div>
-//           <p className="font-medium mb-2">
-//             {label} {required && <RequiredSymbol />}
-//           </p>
+//           {label && <Label label={label} required={required} />}
 
 //           <Select onValueChange={field.onChange} defaultValue={field.value} {...props}>
 //             <SelectTrigger className="h-12">

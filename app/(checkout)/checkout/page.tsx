@@ -2,7 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { CheckoutAddress, CheckoutCart, CheckoutPersonalInfo, CheckoutSidebar, Container, Title } from "shared/components/shared";
+import { 
+  CheckoutAddress, 
+  CheckoutCart, 
+  CheckoutPersonalInfo, 
+  CheckoutSidebar, 
+  Container, 
+  Title 
+} from "shared/components/shared";
 import { OrderFormInputs, orderFormSchema } from "shared/components/shared/checkout/schemas/orderFormSchema";
 import { useCart } from "shared/hooks";
 
