@@ -10,12 +10,12 @@ type Props = {
 };
 
 const VAT = 15;
-const DEVIVERY_PRICE = 250;
+const DEVIVERY_PRICE = 5;
 
 export const CheckoutSidebar = ({ totalAmount, className, loading }: Props) => {
   
   const vatPrice = totalAmount * VAT / 100;
-  const totalPrice = totalAmount + vatPrice + DEVIVERY_PRICE;
+  const totalPrice = totalAmount ? totalAmount + vatPrice + DEVIVERY_PRICE : 0;
   
   return (
     <InfoBlock className={cn("p-6 sticky top-4", className)}>
@@ -24,7 +24,7 @@ export const CheckoutSidebar = ({ totalAmount, className, loading }: Props) => {
         {
           loading 
            ? <Skeleton className="h-11 w-48 bg-gray-200 rounded-[8px] animate-pulse" />
-           : <span className="h-11 text-[34px] font-extrabold">{totalPrice} руб.</span>          
+           : <span className="h-11 text-[34px] font-extrabold">{`${totalPrice} руб.`}</span>          
         }
       </div>
 

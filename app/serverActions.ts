@@ -3,7 +3,9 @@
 import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
 import { prisma } from "prisma/prisma";
+import { PayOrderTemplate } from "shared/components/shared";
 import { OrderFormInputs } from "shared/components/shared/checkout/schemas/orderFormSchema";
+import { sendEmail } from "shared/lib";
 
 export async function createOrder(data: OrderFormInputs) {
   try {
@@ -69,15 +71,21 @@ export async function createOrder(data: OrderFormInputs) {
         cartId: userCart.id,
       },
     });
+    //TODO: сделать запрос на payment сервис
 
-   //TODO: сделать запрос на payment сервис
-
-   
-    
+    await sendEmail(
+      data.email,
+      "Ваш заказ №" + order.id + " успешно оформлен!",
+      PayOrderTemplate({
+        oderId: order.id,
+        totalAmount: order.totalAmount,
+        paymentUrl: "https://mail.ru",
+      })
+    );
   } catch (error) {
-    console.error(error);
+    console.error("[CREATE_ORDER] Server error: ", error);
     throw new Error("Не удалось оформить заказ");
   }
 
-  return "https://tastybox.by/payment";
+  return "https://mail.ru";
 }

@@ -5,3 +5,4 @@ export { getCartItemDetails } from "./getCartItemDetails";
 export { getCartDetails } from "./getCartDetails";
 export { calcCartItemTotalAmount } from "./calcCartItemTotalAmount";
 export { getProductInCorrectCase } from "./getProductInCorrectCase";
+export { sendEmail } from "./sendEmail";
