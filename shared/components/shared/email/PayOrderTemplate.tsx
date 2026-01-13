@@ -49,7 +49,7 @@ export function PayOrderTemplate({ oderId, totalAmount, paymentUrl }: Props) {
                         letterSpacing: '-0.5px',
                       }}
                     >
-                      🍕 TastyBox
+                      🍕 TastyShop
                     </h1>
                   </td>
                 </tr>
@@ -240,7 +240,7 @@ export function PayOrderTemplate({ oderId, totalAmount, paymentUrl }: Props) {
                         fontSize: '14px',
                       }}
                     >
-                      С уважением, команда TastyBox
+                      С уважением, команда Tasty Shop
                     </p>
                     <p
                       style={{
