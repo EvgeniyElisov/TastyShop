@@ -79,7 +79,7 @@ export async function createOrder(data: OrderFormInputs) {
       PayOrderTemplate({
         oderId: order.id,
         totalAmount: order.totalAmount,
-        paymentUrl: "https://mail.ru",
+        paymentUrl: "localhost:3000/checkout/payment",
       })
     );
   } catch (error) {
@@ -87,5 +87,5 @@ export async function createOrder(data: OrderFormInputs) {
     throw new Error("Не удалось оформить заказ");
   }
 
-  return "https://mail.ru";
+  return "/checkout/payment";
 }
