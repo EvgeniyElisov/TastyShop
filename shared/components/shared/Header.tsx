@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "shared/lib/utils";
-import { CartButton, Container, ProfileButton, SearchInput } from ".";
+import { AuthModal, CartButton, Container, ProfileButton, SearchInput } from ".";
+import { useState } from "react";
 
 type Props = {
   className?: string;
@@ -10,6 +13,15 @@ type Props = {
 };
 
 export const Header = ({ className, hasSearch = true, hasCart = true }: Props) => {
+  const [isOpenSignInModal, setIsOpenSignInModal] = useState(false);
+
+  const openSignInModal = () => {
+    setIsOpenSignInModal(true);
+  };
+
+  const closeSignInModal = () => {
+    setIsOpenSignInModal(false);
+  };
 
   return (
     <header className={cn("border-b", className)}>
@@ -30,7 +42,8 @@ export const Header = ({ className, hasSearch = true, hasCart = true }: Props) =
           </div>
         )}
         <div className="flex items-center gap-3">
-         <ProfileButton />
+          <AuthModal open={isOpenSignInModal} onClose={closeSignInModal} />
+          <ProfileButton openSignInModal={openSignInModal} />
           {hasCart && <CartButton />}
         </div>
       </Container>

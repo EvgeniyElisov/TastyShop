@@ -1,20 +1,33 @@
 "use client";
 
-import { User } from "lucide-react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { CircleUser, User } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { Button } from "shared/components/ui";
 
-export const ProfileButton = () => {
-  const { data: session } = useSession();
+type Props = {
+  openSignInModal: () => void;
+  className?: string;
+};
 
+export const ProfileButton = ({ openSignInModal, className }: Props) => {
+  const { data: session } = useSession();
+  
   return (
-    <Button 
-        onClick={() => session ? signOut() : signIn("github", { callbackUrl: "/", redirect: true })} 
-        variant={"outline"} 
-        className={"flex items-center gap-1"}
-    >
-      <User size={16} />
-      {session ? "Выйти" : "Войти"}
-    </Button>
+    <div className={className}>
+      {!session ? (
+        <Button onClick={openSignInModal} variant={"outline"} className={"flex items-center gap-1"}>
+          <User size={16} />
+          Войти
+        </Button>
+      ) : (
+        <Link href="/profile">
+          <Button variant="secondary" className="flex items-center gap-2">
+            <CircleUser size={18} />
+            Профиль
+          </Button>
+        </Link>
+      )}
+    </div>
   );
 };
