@@ -19,7 +19,6 @@ export { PizzaSelector } from "./PizzaSelector";
 export { IngredientItem } from "./IngredientItem";
 export { IngredientsList } from "./IngredientsList";
 export { ProductForm } from "./ProductForm";
-export { Providers } from "./Providers";
 export { MessageBlock } from "./MessageBlock";
 export * from "./email";
 export * from "./form";

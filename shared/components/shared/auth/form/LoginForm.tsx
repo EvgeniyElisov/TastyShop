@@ -43,34 +43,59 @@ export const LoginForm = ({ onClose }: Props) => {
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex justify-between items-center">
-          <div className="mr-2">
-            <Title text="Вход в аккаунт" size="md" className="font-bold" />
-            <p className="text-gray-400">Введите свою почту, чтобы войти в свой аккаунт</p>
+      <form className="flex flex-col gap-6" onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex justify-between items-start mb-2">
+          <div className="flex-1 mr-4">
+            <Title text="Вход в аккаунт" size="md" className="font-bold mb-2" />
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Введите свою почту, чтобы войти в свой аккаунт
+            </p>
           </div>
-          <Image src="/assets/images/email-icon.png" alt="email-icon" width={60} height={60} />
+          <div className="relative flex-shrink-0">
+            <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl"></div>
+            <Image 
+              src="/assets/images/email-icon.png" 
+              alt="email-icon" 
+              width={64} 
+              height={64}
+              className="relative z-10 drop-shadow-sm"
+            />
+          </div>
         </div>
 
-        <FormField 
-          type="email" 
-          name="email" 
-          label="E-Mail" 
-          placeholder="Введите вашу почту" 
-          required 
-        />
-        <FormField 
-          type="password" 
-          name="password" 
-          label="Пароль" 
-          placeholder="Введите ваш пароль" 
-          required 
-        />
+        <div className="space-y-5">
+          <FormField 
+            type="email" 
+            name="email" 
+            label="E-Mail" 
+            placeholder="Введите вашу почту" 
+            required 
+          />
+          <FormField 
+            type="password" 
+            name="password" 
+            label="Пароль" 
+            placeholder="Введите ваш пароль" 
+            required 
+          />
+        </div>
 
-        <SubmitButton isSubmitting={form.formState.isSubmitting}>
+        <SubmitButton 
+          isSubmitting={form.formState.isSubmitting} 
+          className="h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow mt-2"
+        >
           Войти
         </SubmitButton>
-        <p className="text-gray-400">Или войдите с помощью социальных сетей</p>
+
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border"></div>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-4 text-muted-foreground">Или войдите с помощью</span>
+          </div>
+        </div>
+
         <SocialAuthButtons type="login" onSwitchType={() => {}} />
       </form>
     </FormProvider>

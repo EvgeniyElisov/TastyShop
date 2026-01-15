@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FormField, SubmitButton } from "../..";
+import { FormField, SubmitButton, Title } from "../..";
 import { formRegisterSchema, RegisterFormInputs } from "./schemas";
 
 type Props = {
@@ -44,37 +44,49 @@ export const RegisterForm = ({ onClose, onClickLogin }: Props) => {
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField 
-          type="email" 
-          name="email" 
-          label="E-Mail" 
-          placeholder="Введите вашу почту" 
-          required 
-        />
-        <FormField 
-          type="text" 
-          name="fullName" 
-          label="Полное имя" 
-          placeholder="Введите ваше полное имя" 
-          required 
-        />
-        <FormField 
-          type="password" 
-          name="password" 
-          label="Пароль" 
-          placeholder="Введите ваш пароль" 
-          required 
-        />
-        <FormField 
-          type="password" 
-          name="confirmPassword" 
-          label="Подтвердите пароль"
-          placeholder="Подтвердите ваш пароль" 
-          required 
-        />
+      <form className="flex flex-col gap-6" onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="mb-2">
+          <Title text="Создать аккаунт" size="md" className="font-bold mb-2" />
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Заполните форму, чтобы создать новый аккаунт
+          </p>
+        </div>
 
-        <SubmitButton isSubmitting={form.formState.isSubmitting}>
+        <div className="space-y-5">
+          <FormField 
+            type="email" 
+            name="email" 
+            label="E-Mail" 
+            placeholder="Введите вашу почту" 
+            required 
+          />
+          <FormField 
+            type="text" 
+            name="fullName" 
+            label="Полное имя" 
+            placeholder="Введите ваше полное имя" 
+            required 
+          />
+          <FormField 
+            type="password" 
+            name="password" 
+            label="Пароль" 
+            placeholder="Введите ваш пароль" 
+            required 
+          />
+          <FormField 
+            type="password" 
+            name="confirmPassword" 
+            label="Подтвердите пароль"
+            placeholder="Подтвердите ваш пароль" 
+            required 
+          />
+        </div>
+
+        <SubmitButton 
+          isSubmitting={form.formState.isSubmitting} 
+          className="h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow mt-2"
+        >
           Зарегистрироваться
         </SubmitButton>
       </form>

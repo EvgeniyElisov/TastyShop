@@ -3,13 +3,14 @@
 import { Button } from "shared/components/ui";
 
 type Props = {
-  isSubmitting: boolean;
+  isSubmitting?: boolean;
+  className?: string;
   children: React.ReactNode;
 };
 
-export const SubmitButton = ({ isSubmitting, children }: Props) => {
+export const SubmitButton = ({ isSubmitting, children, className }: Props) => {
   return (
-    <Button loading={isSubmitting} className="h-12 text-base" type="submit">
+    <Button loading={isSubmitting} className={className} type="submit">
       {children}
     </Button>
   );

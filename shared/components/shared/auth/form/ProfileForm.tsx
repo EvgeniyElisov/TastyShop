@@ -5,66 +5,117 @@ import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toastError, toastSuccess } from "shared/lib";
-import { Container, FormField, Title } from "../..";
+import { Container, FormField, SubmitButton, Title } from "../..";
 import { Button } from "shared/components/ui";
+import { formRegisterSchema, RegisterFormInputs } from "./schemas";
 
 type Props = {
   data: User;
 };
 
 export const ProfileForm = ({ data }: Props) => {
-  return <div>ProfileForm</div>;
-  // const form = useForm({
-  //   resolver: zodResolver(formRegisterSchema),
-  //   defaultValues: {
-  //     fullName: data.fullName,
-  //     email: data.email,
-  //     password: "",
-  //     confirmPassword: "",
-  //   },
-  // });
+  const form = useForm<RegisterFormInputs>({
+    resolver: zodResolver(formRegisterSchema),
+    defaultValues: {
+      fullName: data.fullName,
+      email: data.email,
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
-  // const onSubmit = async (data: TFormRegisterData) => {
-  //   try {
-  //     await updateUserInfo({
-  //       email: data.email,
-  //       fullName: data.fullName,
-  //       password: data.password,
-  //     });
+  const onSubmit = async (data: RegisterFormInputs) => {
+    try {
+      await updateUserInfo({
+        email: data.email,
+        fullName: data.fullName,
+        password: data.password,
+      });
 
-  //     toastSuccess("Данные обновлены 📝");
-  //   } catch (error) {
-  //     return toastError("Ошибка при обновлении данных");
-  //   }
-  // };
+      toastSuccess("Данные обновлены 📝");
+    } catch (error) {
+      return toastError("Ошибка при обновлении данных");
+    }
+  };
 
-  // const onClickSignOut = () => {
-  //   signOut({
-  //     callbackUrl: "/",
-  //   });
-  // };
+  const onClickSignOut = () => {
+    signOut({
+      callbackUrl: "/",
+    });
+  };
 
-  // return (
-  //   <Container className="my-10">
-  //     <Title text="Личные данные" size="md" className="font-bold" />
+  return (
+    <Container className="my-10">
+      <div className="max-w-2xl mx-auto">
+        <div className="mb-8">
+          <Title text="Личные данные" size="md" className="font-bold mb-2" />
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Управляйте своими личными данными и настройками аккаунта
+          </p>
+        </div>
 
-  //     <FormProvider {...form}>
-  //       <form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
-  //         <FormField type="email" name="email" label="E-Mail" required />
-  //         <FormField type="text" name="fullName" label="Полное имя" required />
+        <div className="bg-card rounded-2xl border border-border p-8 shadow-sm">
+          <FormProvider {...form}>
+            <form className="flex flex-col gap-6" onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="space-y-5">
+                <FormField 
+                  type="email" 
+                  name="email" 
+                  label="E-Mail" 
+                  placeholder="Введите ваш email"
+                  required 
+                />
+                <FormField 
+                  type="text" 
+                  name="fullName" 
+                  label="Полное имя" 
+                  placeholder="Введите ваше полное имя"
+                  required 
+                />
 
-  //         <FormField type="password" name="password" label="Новый пароль" required />
-  //         <FormField type="password" name="confirmPassword" label="Повторите пароль" required />
+                <div className="pt-4 border-t border-border">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Оставьте поля пароля пустыми, если не хотите менять пароль
+                  </p>
+                  <div className="space-y-5">
+                    <FormField 
+                      type="password" 
+                      name="password" 
+                      label="Новый пароль" 
+                      placeholder="Введите новый пароль (необязательно)"
+                    />
+                    <FormField 
+                      type="password" 
+                      name="confirmPassword" 
+                      label="Повторите пароль" 
+                      placeholder="Повторите новый пароль (необязательно)"
+                    />
+                  </div>
+                </div>
+              </div>
 
-  //         <Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
-  //           Сохранить
-  //         </Button>
+              <div className="flex gap-4 pt-4">
+                <SubmitButton 
+                  isSubmitting={form.formState.isSubmitting} 
+                  className="h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow flex-1"
+                >
+                  Сохранить изменения
+                </SubmitButton>
 
-  //         <Button onClick={onClickSignOut} variant="secondary" disabled={form.formState.isSubmitting} className="text-base" type="button">
-  //           Выйти
-  //         </Button>
-  //       </form>
-  //     </FormProvider>
-  //   </Container>
-  // );
+                <Button 
+                  onClick={onClickSignOut} 
+                  variant="outline" 
+                  disabled={form.formState.isSubmitting} 
+                  className="h-12 text-base font-semibold px-6" 
+                  type="button"
+                >
+                  Выйти
+                </Button>
+              </div>
+            </form>
+          </FormProvider>
+        </div>
+      </div>
+    </Container>
+  );
 };
