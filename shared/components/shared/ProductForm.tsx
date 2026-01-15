@@ -1,6 +1,6 @@
 "use client";
 
-import toast from "react-hot-toast";
+import { toastError, toastSuccess } from "shared/lib";
 import { useCartStore } from "shared/store";
 import { ProductWithRelations } from "types/product";
 import { ChoosePizzaForm, ChooseProductForm } from ".";
@@ -25,11 +25,11 @@ export const ProductForm = ({ className, product, onSuccess }: Props) => {
         productVariantId,
         ingredients,
       });
-      toast.success("Товар добавлен в корзину");
+      toastSuccess("Товар добавлен в корзину");
       onSuccess?.();
     } catch (error) {
       console.error(error);
-      toast.error("Не удалось добавить товар в корзину");
+      toastError("Не удалось добавить товар в корзину");
     }
   };
 

@@ -7,6 +7,8 @@ import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { FormField, Title } from "../..";
 import { Button } from "shared/components/ui";
+import Image from "next/image";
+import { toastError, toastSuccess } from "shared/lib";
 
 type Props = {
   onClose?: () => void;
@@ -29,17 +31,15 @@ export const LoginForm = ({ onClose }: Props) => {
       });
 
       if (!resp?.ok) {
-        return toast.error("Неверный E-Mail или пароль", {
-          icon: "❌",
-        });
+        toastError("Неверный E-Mail или пароль");
+        return;
       }
 
+      toastSuccess("Вы успешно вошли в аккаунт");
       onClose?.();
     } catch (error) {
       console.log("Error [LOGIN]", error);
-      toast.error("Не удалось войти", {
-        icon: "❌",
-      });
+      toastError("Не удалось войти в аккаунт");
     }
   };
 
@@ -51,14 +51,14 @@ export const LoginForm = ({ onClose }: Props) => {
             <Title text="Вход в аккаунт" size="md" className="font-bold" />
             <p className="text-gray-400">Введите свою почту, чтобы войти в свой аккаунт</p>
           </div>
-          <img src="/assets/images/phone-icon.png" alt="phone-icon" width={60} height={60} />
+          <Image src="/assets/images/email-icon.png" alt="email-icon" width={60} height={60} />
         </div>
 
         <FormField name="email" label="E-Mail" required />
         <FormField type="password" name="password" label="Пароль" required />
 
-        <Button disabled={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-          {form.formState.isSubmitting ? "Вход..." : "Войти"}
+        <Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
+          Войти
         </Button>
       </form>
     </FormProvider>

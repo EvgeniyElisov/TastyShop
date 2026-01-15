@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createOrder } from "app/serverActions";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useCart } from "shared/hooks";
+import { toastError, toastSuccess } from "shared/lib";
 import { CheckoutAddress, CheckoutCart, CheckoutPersonalInfo, CheckoutSidebar } from ".";
 import { OrderFormInputs, orderFormSchema } from "./schemas";
 
@@ -37,17 +37,13 @@ export const CheckoutForm = () => {
     try {
       setSubmitting(true);
       const url = await createOrder(data);
-      toast.success("Заказ успешно оформлен! 📝 Переход на страницу оплаты...", {
-        icon: "✅",
-      });
+      toastSuccess("Заказ успешно оформлен! 📝 Переход на страницу оплаты...");
       if (url) {
         location.href = url;
       }
     } catch (error) {
       console.error(error);
-      return toast.error("Не удалось оформить заказ", {
-        icon: "❌",
-      });
+      toastError("Не удалось оформить заказ");
     } finally {
       setSubmitting(false);
     }
