@@ -44,7 +44,7 @@ export const AddressInput = ({ value, onChange, placeholder }: Props) => {
   return (
     <AddressSuggestions
       value={selectedSuggestion}
-      token="a4c9ee63f61348d29c89e4edd52e40a2bfacd3fa"
+      token={process.env.NEXT_PUBLIC_DADATA_API_KEY || ""}
       onChange={handleChange}
       filterLocations={[{ country: "Беларусь" }]}
       inputProps={{
