@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
       where: { id: verificationCode.id },
     });
 
-    return NextResponse.redirect(new URL("/?verified", req.url));
+    return NextResponse.redirect(new URL("/verified", req.url));
 
   } catch (error) {
     console.error("[VERIFY_USER] Server error: ", error);

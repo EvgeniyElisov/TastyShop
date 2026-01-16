@@ -2,12 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createOrder } from "app/serverActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useCart } from "shared/hooks";
 import { toastError, toastSuccess } from "shared/lib";
 import { CheckoutAddress, CheckoutCart, CheckoutPersonalInfo, CheckoutSidebar } from ".";
 import { OrderFormInputs, orderFormSchema } from "./schemas";
+import { useSession } from "next-auth/react";
 
 export const CheckoutForm = () => {
   const { 
@@ -20,6 +21,7 @@ export const CheckoutForm = () => {
 } = useCart();
 
   const [submitting, setSubmitting] = useState(false);
+  const session = useSession();  
 
   const form = useForm<OrderFormInputs>({
     resolver: zodResolver(orderFormSchema),
@@ -32,6 +34,11 @@ export const CheckoutForm = () => {
       comment: "",
     },
   });
+
+  useEffect(() => {
+    
+   
+  }, [session]);
 
   const onSubmit = async (data: OrderFormInputs) => {
     try {

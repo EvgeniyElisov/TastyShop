@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "shared/lib/utils";
 import { AuthModal, CartButton, Container, ProfileButton, SearchInput } from ".";
-import { toastSuccess } from "shared/lib";
 
 type Props = {
   className?: string;
@@ -15,8 +13,7 @@ type Props = {
 };
 
 export const Header = ({ className, hasSearch = true, hasCart = true }: Props) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+ 
   const [isOpenSignInModal, setIsOpenSignInModal] = useState(false);
 
   const openSignInModal = () => {
@@ -26,19 +23,6 @@ export const Header = ({ className, hasSearch = true, hasCart = true }: Props) =
   const closeSignInModal = () => {
     setIsOpenSignInModal(false);
   };
-  ("");
-
-  useEffect(() => {
-    let toastMessage = "";
-    if (searchParams.has("verified")) {
-      toastMessage = "Регистрация успешно подтверждена!";
-    }
-    console.log(searchParams);
-    if (toastMessage) {
-      toastSuccess(toastMessage);
-      router.replace("/");
-    }
-  }, []);
 
   return (
     <header className={cn("border-b", className)}>
