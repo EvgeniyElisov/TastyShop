@@ -28,24 +28,25 @@ export const ChooseProductForm = ({
   }
 
   return (
-    <div className={cn(className, 'flex flex-1')}>
+    <div className={cn(className, 'flex flex-1 gap-16')}>
       <div className="flex items-center justify-center flex-1 relative w-full">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-3xl -z-10 blur-3xl" />
         <Image
           src={imageUrl}
           alt={name}
-          className="relative left-2 top-2 transition-all z-10 duration-300"
-          width={350}
-          height={350}
+          className="relative left-2 top-2 transition-all z-10 duration-300 drop-shadow-2xl"
+          width={480}
+          height={480}
         />
       </div>
 
-      <div className="w-[490px] bg-form-bg p-7">
-        <Title text={name} size="md" className="font-extrabold mb-1" />
+      <div className="w-[560px] bg-gradient-to-br from-form-bg to-white p-10 rounded-3xl shadow-2xl border border-gray-100">
+        <Title text={name} size="md" className="font-extrabold mb-6" />
 
         <Button
           loading={loading}
           onClick={addProductToCartHandler}
-          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+          className="h-[64px] px-10 text-lg font-bold rounded-2xl w-full mt-8 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02]">
           Добавить в корзину за {price} руб.
         </Button>
       </div>

@@ -37,25 +37,31 @@ export const Stories = ({ className }: Props) => {
 
   return (
     <>
-      <Container className={cn("flex items-center justify-between gap-2 my-10", className)}>
+      <Container className={cn("flex items-center justify-between gap-4 my-14", className)}>
         {stories.length === 0 &&
           Array(6)
             .fill(0)
-            .map((_, index) => <Skeleton key={index} className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse" />)}
+            .map((_, index) => <Skeleton key={index} className="w-[240px] h-[300px] bg-gradient-to-br from-gray-200 to-gray-100 rounded-2xl animate-pulse shadow-lg" />)}
         {stories.map((story) => (
-          <Image 
-            key={story.id} 
-            alt={`Story ${story.id}`}
-            onClick={() => onClickStory(story)} 
-            className="rounded-md cursor-pointer" 
-            height={250}
-            width={200} 
-            src={story.previewImageUrl} 
-          />
+          <div 
+            key={story.id}
+            className="relative group cursor-pointer"
+            onClick={() => onClickStory(story)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 rounded-2xl ring-2 ring-primary/0 group-hover:ring-primary/30 transition-all duration-300" />
+            <Image 
+              alt={`Story ${story.id}`}
+              className="rounded-2xl transition-all duration-300 group-hover:scale-105 shadow-lg group-hover:shadow-xl" 
+              height={300}
+              width={240} 
+              src={story.previewImageUrl} 
+            />
+          </div>
         ))}
       </Container>
       {open && (
-        <div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
+        <div className="fixed left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
           <div className="relative" style={{ width: 520 }}>
             <button className="absolute -right-10 -top-5 z-30" onClick={() => setOpen(false)}>
               <X className="absolute top-0 right-0 w-8 h-8 text-white/50" />

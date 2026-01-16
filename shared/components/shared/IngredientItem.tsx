@@ -23,14 +23,25 @@ export const IngredientItem = ({
     <div
       onClick={onClick}
       className={cn(
-        'flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-transparent',
-        { 'border-primary': active },
+        'flex items-center flex-col p-3 rounded-2xl w-full text-center relative cursor-pointer transition-all duration-200 group',
+        active 
+          ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary shadow-lg shadow-primary/20 scale-105' 
+          : 'bg-white border-2 border-gray-100 shadow-md hover:shadow-lg hover:border-primary/30 hover:scale-105',
         className,
       )}>
-      {active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
-      <Image width={110} height={110} src={imageUrl} alt={name} />
-      <span className="text-xs mb-1">{name}</span>
-      <span className="font-bold">{price} руб.</span>
+      {active && (
+        <div className="absolute top-2 right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-md">
+          <CircleCheck className="text-white" size={16} />
+        </div>
+      )}
+      <div className={cn(
+        "rounded-xl overflow-hidden mb-2 transition-transform duration-200",
+        active ? "ring-2 ring-primary/30" : "ring-1 ring-gray-100 group-hover:ring-primary/20"
+      )}>
+        <Image width={110} height={110} src={imageUrl} alt={name} className="object-cover" />
+      </div>
+      <span className={cn("text-xs mb-1 font-medium", active ? "text-primary" : "text-gray-700")}>{name}</span>
+      <span className={cn("font-bold text-sm", active ? "text-primary" : "text-gray-900")}>{price} руб.</span>
     </div>
   );
 };

@@ -18,22 +18,25 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex flex-col justify-between pb-0 bg-page-bg">
+      <SheetContent className="flex flex-col justify-between pb-0 bg-gradient-to-br from-page-bg to-white">
         <div className={cn("flex flex-col h-full", !totalAmount && "justify-center")}>
           {totalAmount > 0 && (
-            <SheetHeader>
-              <SheetTitle>
-                В корзине <span className="font-bold">{items.length} {getProductInCorrectCase(items.length)}</span>
+            <SheetHeader className="pb-6 border-b border-gray-200 bg-gradient-to-r from-gray-50/50 to-transparent">
+              <SheetTitle className="text-2xl">
+                В корзине <span className="font-bold text-primary">{items.length} {getProductInCorrectCase(items.length)}</span>
               </SheetTitle>
             </SheetHeader>
           )}
           {!totalAmount && (
-            <div className="flex flex-col items-center justify-center w-72 mx-auto">
-              <Image src="/assets/images/empty-box.png" alt="Empty cart" width={120} height={120} />
-              <Title size="sm" text="Корзина пустая" className="text-center font-bold my-2" />
-              <p className="text-center text-neutral-500 mb-5">Добавьте хотя бы один товар, чтобы совершить заказ</p>
+            <div className="flex flex-col items-center justify-center w-80 mx-auto">
+              <div className="relative mb-6">
+                <div className="absolute inset-0 bg-primary/10 rounded-full blur-2xl" />
+                <Image src="/assets/images/empty-box.png" alt="Empty cart" width={160} height={160} className="relative" />
+              </div>
+              <Title size="sm" text="Корзина пустая" className="text-center font-bold my-4" />
+              <p className="text-center text-gray-500 mb-8 text-base leading-relaxed">Добавьте хотя бы один товар, чтобы совершить заказ</p>
 
-              <Button asChild className="w-56 h-12 text-base" size="lg">
+              <Button asChild className="w-72 h-14 text-base font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all" size="lg">
                 <SheetClose >
                   <ArrowLeft className="w-5 mr-2" />
                   Вернуться назад
@@ -44,9 +47,9 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 
           {totalAmount > 0 && (
             <>
-              <div className="-mx-6 mt-5 overflow-auto flex-1">
+              <div className="-mx-6 mt-6 overflow-auto flex-1">
                 {items.map((item) => (
-                  <div key={item.id} className="mb-2">
+                  <div key={item.id} className="mb-3">
                     <CartDrawerItem
                       id={item.id}
                       imageUrl={item.imageUrl}
@@ -62,15 +65,15 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
                 ))}
               </div>
 
-              <SheetFooter className="-mx-6 bg-white p-8">
+              <SheetFooter className="-mx-6 bg-gradient-to-br from-white to-gray-50/50 p-10 border-t border-gray-200 shadow-lg">
                 <div className="w-full">
-                  <div className="flex mb-4">
-                    <span className="flex flex-1 text-lg text-neutral-500">
+                  <div className="flex mb-6 pb-4 border-b border-gray-200">
+                    <span className="flex flex-1 text-xl text-gray-600 font-semibold">
                       Итого
-                      <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
+                      <div className="flex-1 border-b border-dashed border-b-gray-300 relative -top-1 mx-3" />
                     </span>
 
-                    <span className="font-bold text-lg">{totalAmount} руб.</span>
+                    <span className="font-bold text-2xl text-primary">{totalAmount} руб.</span>
                   </div>
 
                   <Link href="/checkout">
@@ -78,10 +81,10 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
                       onClick={() => setRedirecting(true)}
                       loading={loading || redirecting}
                       type="submit"
-                      className="w-full h-12 text-base"
+                      className="w-full h-16 text-base font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02]"
                     >
                       Оформить заказ
-                      <ArrowRight className="w-5 ml-2" />
+                      <ArrowRight className="w-6 ml-2" />
                     </Button>
                   </Link>
                 </div>

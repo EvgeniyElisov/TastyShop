@@ -29,7 +29,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   }
 
   return (
-    <Container className={"flex flex-col mt-10 mb-10"}>
+    <Container className={"flex flex-col mt-14 mb-16"}>
       <ProductForm product={product} />
     </Container>
   );

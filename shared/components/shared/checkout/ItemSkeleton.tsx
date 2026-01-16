@@ -6,13 +6,13 @@ type Props = {
 
 export const ItemSkeleton = ({ className }: Props) => {
   return (
-    <div className={cn("flex items-center justify-between", className)}>
-      <div className="flex items-center gap-5">
-        <div className="w-[50px] h-[50px] bg-gray-200 rounded-full animate-pulse" />
-        <h2 className="w-40 h-5 bg-gray-200 rounded animate-pulse" />
+    <div className={cn("flex items-center justify-between py-4", className)}>
+      <div className="flex items-center gap-6">
+        <div className="w-[70px] h-[70px] bg-gray-200 rounded-lg animate-pulse" />
+        <h2 className="w-48 h-6 bg-gray-200 rounded animate-pulse" />
       </div>
-      <div className="h-5 w-10 bg-gray-200 rounded animate-pulse" />
-      <div className="h-8 w-[133px] bg-gray-200 rounded animate-pulse" />
+      <div className="h-6 w-16 bg-gray-200 rounded animate-pulse" />
+      <div className="h-10 w-[150px] bg-gray-200 rounded animate-pulse" />
     </div>
   );
 };

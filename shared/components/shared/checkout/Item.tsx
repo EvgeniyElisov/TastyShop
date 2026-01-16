@@ -23,18 +23,18 @@ export const Item= ({
   onClickRemoveCartItem,
 }: Props) => {
   return (
-    <div className={cn('flex items-center justify-between', { "opacity-50 pointer-events-none": disabled }, className)}>
-      <div className="flex items-center gap-5 flex-1">
+    <div className={cn('flex items-center justify-between py-4', { "opacity-50 pointer-events-none": disabled }, className)}>
+      <div className="flex items-center gap-6 flex-1">
         <CartItemDetailsImage src={imageUrl} />
         <CartItemInfo name={name} details={details} />
       </div>
 
       <CartItemDetailsPrice value={price} />
 
-      <div className="flex items-center gap-5 ml-20">
+      <div className="flex items-center gap-6 ml-24">
         <CountButton onClick={onClickCountButton} value={quantity} />
         <button type="button" onClick={onClickRemoveCartItem}>
-          <X className="text-gray-400 cursor-pointer hover:text-gray-600" size={20} />
+          <X className="text-gray-400 cursor-pointer hover:text-gray-600 transition-colors" size={22} />
         </button>
       </div>
     </div>

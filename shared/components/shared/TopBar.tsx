@@ -9,7 +9,7 @@ type Props = {
 
 export const TopBar = ({ className, categories }: Props) => {
   return (
-    <div className={cn("sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10", className)}>
+    <div className={cn("sticky top-[73px] bg-white/95 backdrop-blur-md py-7 shadow-md shadow-black/5 z-10 border-b border-gray-100", className)}>
       <Container className="flex items-center justify-between">
         <Categories items={categories} />
       </Container>

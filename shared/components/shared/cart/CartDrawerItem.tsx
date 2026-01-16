@@ -24,20 +24,28 @@ export const CartDrawerItem = ({
 }: Props) => {
 
   return (
-    <div className={cn("flex bg-white p-5 gap-6", { "opacity-50 pointer-events-none": disabled }, className)}>
-      <CartItemDetailsImage src={imageUrl} />
+    <div className={cn("flex bg-white p-6 gap-6 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg transition-all duration-200", { "opacity-50 pointer-events-none": disabled }, className)}>
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 hover:opacity-100 transition-opacity" />
+        <CartItemDetailsImage src={imageUrl} />
+      </div>
 
       <div className="flex-1">
         <CartItemInfo name={name} details={details} />
 
-        <hr className="my-3" />
+        <hr className="my-5 border-gray-200" />
 
         <div className="flex items-center justify-between">
           <CountButton onClick={onClickCountButton} value={quantity} />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <CartItemDetailsPrice value={price} />
-            <Trash2Icon onClick={onClickRemoveCartItem} className="text-gray-400 cursor-pointer hover:text-gray-600" size={16} />
+            <button 
+              onClick={onClickRemoveCartItem}
+              className="p-2 rounded-lg hover:bg-red-50 transition-colors group"
+            >
+              <Trash2Icon className="text-gray-400 group-hover:text-red-500 transition-colors" size={20} />
+            </button>
           </div>
         </div>
       </div>

@@ -47,19 +47,19 @@ export const ProfileForm = ({ data }: Props) => {
   };
 
   return (
-    <Container className="my-10">
+    <Container className="my-14">
       <div className="max-w-2xl mx-auto">
-        <div className="mb-8">
-          <Title text="Личные данные" size="md" className="font-bold mb-2" />
-          <p className="text-muted-foreground text-sm leading-relaxed">
+        <div className="mb-10">
+          <Title text="Личные данные" size="md" className="font-bold mb-3" />
+          <p className="text-muted-foreground text-base leading-relaxed">
             Управляйте своими личными данными и настройками аккаунта
           </p>
         </div>
 
-        <div className="bg-card rounded-2xl border border-border p-8 shadow-sm">
+        <div className="bg-card rounded-2xl border border-border p-10 shadow-sm">
           <FormProvider {...form}>
-            <form className="flex flex-col gap-6" onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="space-y-5">
+            <form className="flex flex-col gap-8" onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="space-y-6">
                 <FormField 
                   type="email" 
                   name="email" 
@@ -75,11 +75,11 @@ export const ProfileForm = ({ data }: Props) => {
                   required 
                 />
 
-                <div className="pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-4">
+                <div className="pt-6 border-t border-border">
+                  <p className="text-base text-muted-foreground mb-5">
                     Оставьте поля пароля пустыми, если не хотите менять пароль
                   </p>
-                  <div className="space-y-5">
+                  <div className="space-y-6">
                     <FormField 
                       type="password" 
                       name="password" 
@@ -96,10 +96,10 @@ export const ProfileForm = ({ data }: Props) => {
                 </div>
               </div>
 
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-5 pt-6">
                 <SubmitButton 
                   isSubmitting={form.formState.isSubmitting} 
-                  className="h-12 text-base font-semibold shadow-md hover:shadow-lg transition-shadow flex-1"
+                  className="h-14 text-base font-semibold shadow-md hover:shadow-lg transition-shadow flex-1"
                 >
                   Сохранить изменения
                 </SubmitButton>
@@ -108,7 +108,7 @@ export const ProfileForm = ({ data }: Props) => {
                   onClick={onClickSignOut} 
                   variant="outline" 
                   disabled={form.formState.isSubmitting} 
-                  className="h-12 text-base font-semibold px-6" 
+                  className="h-14 text-base font-semibold px-8" 
                   type="button"
                 >
                   Выйти из аккаунта

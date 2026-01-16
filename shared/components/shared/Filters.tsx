@@ -3,6 +3,7 @@
 import { useFilters, useIngredients, useQueryFilters } from "shared/hooks";
 import { CheckboxFiltersGroup, RangeSlider, Title } from ".";
 import { Input } from "../ui";
+import { cn } from "shared/lib/utils";
 
 type Props = {
   className?: string;
@@ -28,13 +29,15 @@ export const Filters = ({ className }: Props) => {
   };
 
   return (
-    <div className={className}>
-      <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
+    <div className={cn("bg-white rounded-3xl p-6 shadow-lg border border-gray-100", className)}>
+      <div className="mb-8">
+        <Title text="Фильтрация" size="sm" className="font-bold" />
+      </div>
 
       <CheckboxFiltersGroup
         title="Тип теста"
         name="PizzaTypes"
-        className={"mt-5"}
+        className={"mt-6"}
         selectedValues={filters.pizzaTypes}
         onClickCheckbox={filters.setPizzaTypes}
         items={[
@@ -46,7 +49,7 @@ export const Filters = ({ className }: Props) => {
       <CheckboxFiltersGroup
         title="Размеры"
         name="Sizes"
-        className={"mt-5"}
+        className={"mt-6"}
         selectedValues={filters.sizes}
         onClickCheckbox={filters.setSizes}
         items={[
@@ -56,9 +59,9 @@ export const Filters = ({ className }: Props) => {
         ]}
       />
 
-      <div className={"mt-5 border-y border-y-neutral-100 py-6 pb-7"}>
-        <p className={"font-bold mb-3"}>Цена от и до:</p>
-        <div className={"flex gap-3 mb-5"}>
+      <div className={"mt-6 border-y border-y-neutral-100 py-7 pb-8"}>
+        <p className={"font-bold mb-4 text-base"}>Цена от и до:</p>
+        <div className={"flex gap-4 mb-6"}>
           <Input
             type="number"
             placeholder={minPrice.toString()}
@@ -89,7 +92,7 @@ export const Filters = ({ className }: Props) => {
       <CheckboxFiltersGroup
         title="Ингредиенты"
         name="Ingredients"
-        className={"mt-5"}
+        className={"mt-6"}
         limit={6}
         defaultItems={items.slice(0, 6)}
         items={items}

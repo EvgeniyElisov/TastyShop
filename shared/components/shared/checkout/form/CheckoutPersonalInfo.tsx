@@ -11,9 +11,9 @@ export const CheckoutPersonalInfo = ({ totalAmount, className }: Props) => {
     <InfoBlock 
         title="2. Персональная информация" 
         className={className} 
-        contentClassName="p-8"
+        contentClassName="p-10"
     >
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-6">
         <FormField 
           type="text" 
           name="firstName" 

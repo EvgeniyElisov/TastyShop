@@ -9,23 +9,19 @@ export default async function Home({searchParams}: {searchParams: Promise<GetSea
 
   return (
     <>
-      <Container className={"mt-10"}>
-        <Title text="Все пиццы" size="lg" className="font-extrabold" />
-      </Container>
-      
       <TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
       <Stories/>
       
-      <Container className={"mt-10 pb-14"}>
-        <div className={"flex gap-[80px]"}>
-          <div className={"w-[250px]"}>
+      <Container className={"mt-16 pb-24"}>
+        <div className={"flex gap-20"}>
+          <div className={"w-[300px] sticky top-[140px] h-fit"}>
             <Suspense>
               <Filters />
             </Suspense>
           </div>
           <div className={"flex-1"}>
-            <div className={"flex flex-col gap-16"}>
+            <div className={"flex flex-col gap-24"}>
               {categories.map(
                 (category) =>
                   category.products.length > 0 && (

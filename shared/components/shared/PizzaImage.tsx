@@ -16,15 +16,18 @@ const mapSizeToDimensions = {
 export const PizzaImage = ({ src, alt, size, className }: Props) => {
   return (
     <div className={cn("flex items-center justify-center flex-1 relative w-full", className)}>
-      <Image
-        src={src}
-        alt={alt}
-        width={mapSizeToDimensions[size]}
-        height={mapSizeToDimensions[size]}
-        className={cn("relative left-2 top-2 transition-all z-10")}
-      />
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed border-2 rounded-full border-gray-200 w-[450px] h-[450px]" />
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dotted border-2 rounded-full border-gray-100 w-[370px] h-[370px]" />
+      <div className="relative z-10 drop-shadow-2xl">
+        <Image
+          src={src}
+          alt={alt}
+          width={mapSizeToDimensions[size]}
+          height={mapSizeToDimensions[size]}
+          className={cn("relative left-2 top-2 transition-all")}
+        />
+      </div>
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed border-2 rounded-full border-primary/20 w-[480px] h-[480px] animate-pulse" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dotted border-2 rounded-full border-primary/10 w-[400px] h-[400px]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-full blur-3xl" />
     </div>
   );
 };

@@ -16,14 +16,14 @@ export const ProfileButton = ({ openSignInModal, className }: Props) => {
   return (
     <div className={className}>
       {!session ? (
-        <Button onClick={openSignInModal} variant={"outline"} className={"flex items-center gap-1"}>
-          <User size={16} />
+        <Button onClick={openSignInModal} variant={"outline"} className={"flex items-center gap-2 text-base"}>
+          <User size={18} />
           Войти
         </Button>
       ) : (
         <Link href="/profile">
-          <Button variant="secondary" className="flex items-center gap-2">
-            <CircleUser size={18} />
+          <Button variant="secondary" className="flex items-center gap-2 text-base">
+            <CircleUser size={20} />
             Профиль
           </Button>
         </Link>
