@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { CheckCircle2, Home } from "lucide-react";
-import { Container } from "shared/components/shared";
-import { Button } from "shared/components/ui";
+import { Container } from "widgets/container";
+import { Button } from "shared/ui";
 
 export default function VerifiedPage() {
   return (

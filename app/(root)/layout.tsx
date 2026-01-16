@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Header } from "shared/components/shared/Header";
+import { Header } from "widgets/header";
 
 export const metadata: Metadata = {
   title: "Tasty Shop | Главная",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header } from "shared/components/shared";
+import { Header } from "widgets/header";
 
 export const metadata: Metadata = {
   title: "Tasty Shop | Корзина",

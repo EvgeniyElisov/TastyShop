@@ -4,8 +4,8 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 import { prisma } from "prisma/prisma";
-import { PayOrderTemplate, VerifyUserTemplate } from "shared/components/shared";
-import { OrderFormInputs } from "shared/components/shared/checkout/form/schemas/orderFormSchema";
+import { PayOrderTemplate, VerifyUserTemplate } from "shared/lib/email-templates";
+import { OrderFormInputs } from "features/checkout/components/form/schemas/orderFormSchema";
 import { getUserSession, sendEmail } from "shared/lib";
 
 export async function createOrder(data: OrderFormInputs) {

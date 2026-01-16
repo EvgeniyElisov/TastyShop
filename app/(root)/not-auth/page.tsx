@@ -1,4 +1,4 @@
-import { MessageBlock } from "shared/components/shared";
+import { MessageBlock } from "widgets/message-block";
 
 export default function UnauthorizedPage() {
   return (

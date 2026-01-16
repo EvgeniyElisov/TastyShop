@@ -1,6 +1,6 @@
-export { useFilters } from "./useFIlters";
-export { useIngredients } from "./useIngredients";
-export { useQueryFilters } from "./useQueryFilters";
-export { usePizzaOptions } from "./usePizzaOptions";
-export { useCart } from "./useCart";
-export { useAddressSuggestion } from "./useAddressSuggestion";
+export { useFilters } from "shared/hooks/useFIlters";
+export { useIngredients } from "shared/hooks/useIngredients";
+export { useQueryFilters } from "shared/hooks/useQueryFilters";
+export { usePizzaOptions } from "shared/hooks/usePizzaOptions";
+export { useCart } from "shared/hooks/useCart";
+export { useAddressSuggestion } from "shared/hooks/useAddressSuggestion";

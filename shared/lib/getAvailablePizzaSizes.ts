@@ -1,5 +1,5 @@
 import { ProductVariant } from "@prisma/client";
-import { Variant } from "shared/components/shared/GroupVariants";
+import { Variant } from "entities/product/GroupVariants";
 import { pizzaSizes, PizzaType } from "shared/constants/pizza";
 
 export const getAvailablePizzaSizes = (type: PizzaType, variants: ProductVariant[]): Variant[] => {

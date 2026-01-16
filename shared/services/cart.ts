@@ -1,5 +1,5 @@
-import { CartDTO, CreateCartItemValues } from "./dto/cart";
-import { axiosInstance } from "./instance";
+import { CartDTO, CreateCartItemValues } from "shared/services/dto/cart";
+import { axiosInstance } from "shared/services/instance";
 
 
 export const getCart = async (): Promise<CartDTO> => {

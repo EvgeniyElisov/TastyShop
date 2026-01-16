@@ -1,4 +1,4 @@
-import { addCartItem } from './../services/cart';
+import { addCartItem } from 'shared/services/cart';
 import { useEffect } from "react";
 import { CreateCartItemValues } from 'shared/services/dto/cart';
 import { useCartStore } from "shared/store";

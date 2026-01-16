@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { prisma } from "prisma/prisma";
-import { Container, ProductForm } from "shared/components/shared";
+import { Container } from "widgets/container";
+import { ProductForm } from "entities/product";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

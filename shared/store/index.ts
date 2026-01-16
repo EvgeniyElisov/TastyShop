@@ -1,2 +1,2 @@
-export { useCartStore } from "./cart";
-export { useCategoryStore } from "./category";
+export { useCartStore } from "shared/store/cart";
+export { useCategoryStore } from "shared/store/category";

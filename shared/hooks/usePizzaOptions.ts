@@ -1,7 +1,7 @@
 import { ProductVariant } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useSet } from "react-use";
-import { Variant } from "shared/components/shared/GroupVariants";
+import { Variant } from "entities/product/GroupVariants";
 import { PizzaSize, PizzaType } from "shared/constants/pizza";
 import { getAvailablePizzaSizes } from "shared/lib";
 

@@ -1,6 +1,6 @@
 import { prisma } from "prisma/prisma";
 import { notFound } from "next/navigation";
-import { ChooseProductModal } from "shared/components/shared";
+import { ChooseProductModal } from "features/product-selection";
 
 type Props = {
   params: Promise<{ id: string }>;

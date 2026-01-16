@@ -1,8 +1,9 @@
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { Container, Title } from "shared/components/shared";
-import { InfoBlock } from "shared/components/shared/checkout";
-import { Button } from "shared/components/ui";
+import { Container } from "widgets/container";
+import { Title } from "widgets/title";
+import { InfoBlock } from "features/checkout";
+import { Button } from "shared/ui";
 
 export default function PaymentPage() {
   return (

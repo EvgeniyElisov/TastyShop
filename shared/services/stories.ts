@@ -1,5 +1,5 @@
 import { Story, StoryItem } from "@prisma/client";
-import { axiosInstance } from "./instance";
+import { axiosInstance } from "shared/services/instance";
 
 export type StoryType = Story & {
   items: StoryItem[];

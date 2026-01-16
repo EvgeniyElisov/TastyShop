@@ -1,7 +1,10 @@
 import { Suspense } from "react";
-import { Container, Filters, ProductsGroupList, Stories, TopBar } from "shared/components/shared";
+import { Container } from "widgets/container";
+import { Filters, FiltersMobile } from "widgets/filters";
+import { ProductsGroupList } from "widgets/products-list";
+import { Stories } from "widgets/stories";
+import { TopBar } from "widgets/top-bar";
 import { findPizzas, GetSearchParams } from "shared/lib/findPizzas";
-import { FiltersMobile } from "shared/components/shared/FiltersMobile";
 
 export default async function Home({searchParams}: {searchParams: Promise<GetSearchParams>}) {
   const params = await searchParams;

@@ -1,4 +1,6 @@
-import { CheckoutForm, Container, Title } from "shared/components/shared";
+import { CheckoutForm } from "features/checkout";
+import { Container } from "widgets/container";
+import { Title } from "widgets/title";
 
 export default function CheckoutPage() {
   return (
