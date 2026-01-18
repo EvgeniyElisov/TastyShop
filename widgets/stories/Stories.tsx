@@ -73,7 +73,7 @@ export const Stories = ({ className }: Props) => {
               stories={selectedStory?.items.map((item) => ({ url: item.sourceUrl })) || []}
               defaultInterval={3000}
               width={520}
-              height={800}
+              height={700}
             />
           </div>
         </div>
